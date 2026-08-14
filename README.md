@@ -13,10 +13,11 @@
 
 ## 工作原理
 
+<!-- AUTO:pipeline:START -->
 ```mermaid
 flowchart TB
     subgraph Discovery["🔍 发现（每 6 小时 · probe */15 巡检触发）"]
-        A1["GitHub Search<br/>topic 双查 + keyword 三查<br/>35s 错峰 · 403 退避"]
+        A1["GitHub Search<br/>topic ×2 + keyword ×3<br/>35s 错峰 · 403 退避"]
         A2["本地库补全<br/>clones / research"]
         A3["🚫 私有 org 仓排除<br/>dshow 撞词黑名单"]
     end
@@ -29,10 +30,11 @@ flowchart TB
     D1 -->|✅ 可用 / ❌ 干净失败| E1["聚合 + README 分类统计"]
     D1 -->|⚠️ 环境类| C1
     E1 --> E2["cadence 交付<br/>增量 ≥100 或满 24h<br/>双仓 bot PR（幂等 supersede）"]
-    S["⚖️ 静态四维轨（每日 02:00）<br/>补丁 / seam / peerDeps / 编译"] -.-> E1
-    M["🛡 radar-probe */15 自愈<br/>7 指标流 × 60s · 看板"] -.-> A1
+    S["⚖️ 静态四维轨（每日 02:00）"] -.-> E1
+    M["🛡 radar-probe */15 自愈<br/>7 指标流 × 60s"] -.-> A1
     M -.-> C1
 ```
+<!-- AUTO:pipeline:END -->
 
 ## 快速导航
 
